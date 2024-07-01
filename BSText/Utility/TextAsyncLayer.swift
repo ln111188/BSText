@@ -197,7 +197,11 @@ public class TextAsyncLayer: CALayer {
             if task?.willDisplay != nil {
                 task?.willDisplay!(self)
             }
-            UIGraphicsBeginImageContextWithOptions(bounds.size, _: self.isOpaque, _: contentsScale)
+            var  size = bounds.size
+            if size.width == 0,size.height == 0 {
+                size = CGSize(width: 1, height: 1)
+            }
+            UIGraphicsBeginImageContextWithOptions(size, _: self.isOpaque, _: contentsScale)
             let context = UIGraphicsGetCurrentContext()
             if self.isOpaque && context != nil {
                 var size: CGSize = bounds.size
